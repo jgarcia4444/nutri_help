@@ -19,4 +19,4 @@ fetch(API_URL, {
 }).then(response => response.json()).then(result => {
     console.log(result);
     getNutrientData(result);
-})
+});
