@@ -6,3 +6,16 @@ body {
 .jumbotron {
     background-color: #33313b;
 }
+
+/* ID SELECTORS */
+
+#startOverButton {
+    background-color: #e3c4a8;
+    border-radius: 50px;
+    margin-top: 10%;
+}
+
+#calculateButton {
+    background-color: #4592af;
+    border-radius: 50px;
+}
