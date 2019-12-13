@@ -1,7 +1,7 @@
 // MAIN.JS
 const APP_ID = "8e4998b8";
 const API_KEY = "adb9b375b1bf447d1ce4f687f4c14ace";
-let FIRST_HALF_API_URL = "https://api.edamam.com/api/food-database/parser?";
+let FIRST_HALF_API_URL = "https://api.edamam.com/api/food-database/parser?ingr=";
 let SECOND_HALF_API_URL = "&app_id=" + APP_ID + "&app_key=" + API_KEY;
 const formElemet = document.querySelector('form');
 // let API_URL = `https://api.edamam.com/api/food-database/parser?ingr=${queryString}&app_id=${APP_ID}&app_key=${API_KEY}`
@@ -25,8 +25,21 @@ function parseUserInfo() {
 
 function formAPIQuery() {
     let userInputDict = parseUserInfo();
-
-
+    var queryURL = FIRST_HALF_API_URL;
+    let foodQueryArr = userInputDict["foodItem"].split(' ')
+    if (foodQueryArr.length > 1) {
+       for (var i = 0; i < foodQueryArr.length; i++) {
+            if (i < foodQueryArr.length - 1) {
+                queryURL += foodQueryArr[i] + "%20";
+            } else {
+                queryURL += foodQueryArr[i];
+            }
+        }
+        queryURL += SECOND_HALF_API_URL; 
+    } else {
+        queryURL += foodQueryArr[0] + SECOND_HALF_API_URL;
+    }
+    return queryURL;
 }
 
 function getNutrientData(foodData) {
@@ -50,5 +63,5 @@ function getNutrientData(foodData) {
 
 formElemet.addEventListener('submit', (event) => {
     event.preventDefault();
-    parseUserInfo();
+    formAPIQuery();
 })
