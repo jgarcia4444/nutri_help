@@ -4,7 +4,10 @@ const API_KEY = "adb9b375b1bf447d1ce4f687f4c14ace";
 let FIRST_HALF_API_URL = "https://api.edamam.com/api/food-database/parser?ingr=";
 let SECOND_HALF_API_URL = "&app_id=" + APP_ID + "&app_key=" + API_KEY;
 const formElemet = document.querySelector('form');
+let mealCaloriesLabelElement = document.querySelector('#mealCaloriesLabel');
 // let API_URL = `https://api.edamam.com/api/food-database/parser?ingr=${queryString}&app_id=${APP_ID}&app_key=${API_KEY}`
+
+
 
 // MARK: - Functions for handling user input and requesting info from the API
 function parseUserInfo() {
@@ -18,7 +21,6 @@ function parseUserInfo() {
         "foodItem" : foodItem.value,
         "servings" : Number(servings.value)
     }
-    console.log(userInputDict);
     formElemet.reset();
     return userInputDict;
 }
@@ -42,26 +44,40 @@ function formAPIQuery() {
     return queryURL;
 }
 
+function queryAPI() {
+
+    let formedURL = formAPIQuery();
+    fetch(formedURL, {
+        method: 'GET',
+        body: JSON.stringify(),
+        headers: {
+            'content-type' : 'application/json',
+            'Accept' : 'application/json'
+        }
+    }).then(response => response.json()).then(result => {
+        let Calories = getNutrientData(result);
+        updateMealCaloriesLabel(Calories);
+    });
+    
+}
+
+// MARK: - Respond to data from api.
 function getNutrientData(foodData) {
     let parsedData = foodData.parsed;
     let nutrients = parsedData[0].food.nutrients;
     console.log(nutrients);
-    return nutrients;
+    return nutrients["ENERC_KCAL"];
+}
+// MARK: - UI UPDATE FUNCTIONS
+function updateMealCaloriesLabel(Calories) {
+    var intMealCalories = Number(mealCaloriesLabel.innerHTML);
+    intMealCalories += Calories;
+    newCalorieString = intMealCalories.toString();
+    mealCaloriesLabel.innerHTML = newCalorieString;
 }
 
-// fetch(API_URL, {
-//     method: 'GET',
-//     body: JSON.stringify(),
-//     headers: {
-//         'content-type' : 'application/json',
-//         'Accept' : 'application/json'
-//     }
-// }).then(response => response.json()).then(result => {
-//     console.log(result);
-//     getNutrientData(result);
-// });
 
 formElemet.addEventListener('submit', (event) => {
     event.preventDefault();
-    formAPIQuery();
-})
+    queryAPI();
+});
