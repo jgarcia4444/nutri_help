@@ -13,13 +13,8 @@ let mealCaloriesLabelElement = document.querySelector('#mealCaloriesLabel');
 function parseUserInfo() {
     //
     let foodItem = document.querySelector('#foodItem');
-    let servings = document.querySelector('#servings');
-    if (Number(servings.value) == 0 || servings.value == null) {
-        servings.value = 1;
-    }
     let userInputDict = {
-        "foodItem" : foodItem.value,
-        "servings" : Number(servings.value)
+        "foodItem" : foodItem.value
     }
     formElemet.reset();
     return userInputDict;
@@ -63,10 +58,13 @@ function queryAPI() {
 
 // MARK: - Respond to data from api.
 function getNutrientData(foodData) {
+    console.log(foodData);
     let parsedData = foodData.parsed;
+    console.log(parsedData);
     let nutrients = parsedData[0].food.nutrients;
     console.log(nutrients);
     return nutrients["ENERC_KCAL"];
+
 }
 // MARK: - UI UPDATE FUNCTIONS
 function updateMealCaloriesLabel(Calories) {
@@ -75,6 +73,18 @@ function updateMealCaloriesLabel(Calories) {
     newCalorieString = intMealCalories.toString();
     mealCaloriesLabel.innerHTML = newCalorieString;
 }
+
+// MARK: - CLEAR BUTTON FUNCTIONALITY
+
+function clearMealCaloriesLabel() {
+    mealCaloriesLabel.innerHTML = "0000";
+}
+
+const clearButton = document.querySelector('#startOverButton');
+
+clearButton.addEventListener('click', (event) => {
+    clearMealCaloriesLabel();
+});
 
 
 formElemet.addEventListener('submit', (event) => {

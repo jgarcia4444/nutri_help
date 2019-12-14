@@ -1,21 +1,33 @@
 body {
-    background-color: #33313b;
+    background-image: radial-gradient(#e3c4a8 5%, #4592af 30%, #33313b 65%);
     color: #f6f5f5;
 }
 /* Class selectors */
 .jumbotron {
-    background-color: #33313b;
+    background-color: rgba(0,0,0,0.0);
 }
 
 /* ID SELECTORS */
 
 #startOverButton {
-    background-color: #e3c4a8;
-    border-radius: 50px;
+    background-color: #4592af;
+    border-radius: 15px;
     margin-top: 10%;
+    color: #f6f5f5;
+}
+
+#startOverButton:hover {
+    background-color: #33313b;
 }
 
 #calculateButton {
+    background-color: #e3c4a8;
+    border-radius: 15px;
+    color: #33313b;
+}
+
+#calculateButton:hover {
     background-color: #4592af;
-    border-radius: 50px;
+    color: #f6f5f5;
+    
 }

@@ -1,6 +1,6 @@
 /* MAIN.CSS */
 body {
-    background-color: #33313b;
+    background-image: radial-gradient(#e3c4a8 5%, #4592af 30%, #33313b 65%);
     color: #f6f5f5;
 }
 
@@ -10,11 +10,29 @@ hr {
 
 .jumbotron {
     margin-top: 10%;
-    background-color: #33313b;
+    background-color: rgba(0,0,0,0.0);
 }
 
 .description {
     margin: 10% auto;
-    width: 55%;
-    
+    width: 70%;
+}
+
+.btn {
+    background-color: #e3c4a8;
+    border-radius: 15%;
+    color: #33313b;
+}
+
+.btn:hover {
+    background-color: #4592af;
+    color: #f6f5f5;
+}
+a {
+    color: #33313b;
+    text-decoration: none;
+}
+a:hover {
+    background-color: #4592af;
+    color: #f6f5f5;
 }
