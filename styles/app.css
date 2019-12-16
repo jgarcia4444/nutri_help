@@ -5,13 +5,24 @@ body {
 /* Class selectors */
 .jumbotron {
     background-color: rgba(0,0,0,0.0);
+    margin-top: 10%;
+}
+
+.nav-link {
+    color: #f6f5f5;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+    background-color: #e3c4a8;
+    color: #33313b;
 }
 
 /* ID SELECTORS */
 
 #startOverButton {
     background-color: #4592af;
-    border-radius: 15px;
+    border-radius: 20px;
     margin-top: 10%;
     color: #f6f5f5;
 }
@@ -22,8 +33,9 @@ body {
 
 #calculateButton {
     background-color: #e3c4a8;
-    border-radius: 15px;
+    border-radius: 20px;
     color: #33313b;
+    margin: 7% auto;
 }
 
 #calculateButton:hover {
@@ -31,3 +43,8 @@ body {
     color: #f6f5f5;
     
 }
+
+#navContainer {
+    margin-top: 7%;
+}
+

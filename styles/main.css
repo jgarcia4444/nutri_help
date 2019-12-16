@@ -1,4 +1,7 @@
 /* MAIN.CSS */
+
+/* ELEMENT SELECTORS */
+
 body {
     background-image: radial-gradient(#e3c4a8 5%, #4592af 30%, #33313b 65%);
     color: #f6f5f5;
@@ -7,6 +10,17 @@ body {
 hr {
     background-color: #f6f5f5;
 }
+
+a {
+    color: #33313b;
+    text-decoration: none;
+}
+a:hover {
+    background-color: #4592af;
+    color: #f6f5f5;
+}
+
+/* CLASSS SELECTORS */
 
 .jumbotron {
     margin-top: 10%;
@@ -20,7 +34,7 @@ hr {
 
 .btn {
     background-color: #e3c4a8;
-    border-radius: 15%;
+    border-radius: 20px;
     color: #33313b;
 }
 
@@ -28,11 +42,22 @@ hr {
     background-color: #4592af;
     color: #f6f5f5;
 }
-a {
-    color: #33313b;
-    text-decoration: none;
-}
-a:hover {
-    background-color: #4592af;
+
+
+.nav-link {
     color: #f6f5f5;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+    background-color: #e3c4a8;
+    color: #33313b;
+}
+
+
+
+/* ID SELECTORS */
+
+#navContainer {
+    margin-top: 10%;
 }
