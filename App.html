@@ -10,6 +10,7 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="./styles/app.css">
+        <script src="https://developer.edamam.com/attribution/badge.js"></script>
     </head>
     <body>
         <div class="container">
@@ -28,7 +29,7 @@
                     Meal Calories:
                 </h1>
                 <h4 class="display-4" id="mealCaloriesLabel">0000</h4>
-                <button class="btn" type="button" id="startOverButton">Clear</button>
+                
             </div>
             <form>
                 <div class="form-group">
@@ -38,10 +39,25 @@
                     <input type="text" name="foodItem" id="foodItem" placeholder="What did yo have to eat?" class="form-control" aria-describedby="foodHelp" required>
                     <small id="foodHelp" class="form-text text-muted">Specify the amount.</small>
                 </div>
-                <div class="col text-center">
-                    <button type="submit" class="btn" id="calculateButton">Calculate Calories</button>
+                <div class="row text-center">
+                    <div class="col">
+                        <button type="submit" class="btn" id="calculateButton">Calculate Calories</button>
+                    </div> 
+                    <div class="col">
+                        <button class="btn" type="button" id="startOverButton">Start Over</button>
+                    </div>
                 </div>
             </form>
+            <div class="row text-center" id="footer">
+                <div class="col">
+                    <div id="copyright">
+                        Jake Garcia &copy;2019
+                    </div>
+                </div>
+                <div class="col">
+                    <div id="edamam-badge" data-color="transparent"></div>
+                </div>
+            </div>
         </div>
     </body>
     <script src="./main.js"></script>

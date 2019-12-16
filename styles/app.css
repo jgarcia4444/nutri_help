@@ -23,7 +23,7 @@ body {
 #startOverButton {
     background-color: #4592af;
     border-radius: 20px;
-    margin-top: 10%;
+    margin: 10% auto;
     color: #f6f5f5;
 }
 
@@ -35,7 +35,7 @@ body {
     background-color: #e3c4a8;
     border-radius: 20px;
     color: #33313b;
-    margin: 3% auto;
+    margin: 10% auto;
 }
 
 #calculateButton:hover {
@@ -47,4 +47,12 @@ body {
 #navContainer {
     margin-top: 7%;
 }
+
+#footer {
+    position: fixed;
+    bottom: 0%;
+    width: 100%;
+    align-content: center;
+}
+
 
