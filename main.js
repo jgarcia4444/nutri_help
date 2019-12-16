@@ -53,15 +53,11 @@ function queryAPI() {
     }).then(response => response.json()).then(result => {
         let parsedData = getNutrientParsedData(result);
         let quantitySpecificData = getNutrientDataPerQuantity(parsedData);
-        // let nutrients = getNutrients(quantitySpecificData);
-        // let Calories = getkCal(nutrients);
-        // updateMealCaloriesLabel(Calories);
     });
 }
 
 // MARK: - Respond to data from api.
 function getNutrientParsedData(foodData) {
-    console.log(foodData);
     let parsedData = foodData.parsed;
     return parsedData;
 }
@@ -92,17 +88,22 @@ function getNutrientDataPerQuantity(parsedData) {
             'content-type': 'application/json'
         }
     }).then(response => response.json()).then(result => {
-        console.log(result);
         let totalNutrients = getTotalNutrients(result);
+        let calories = getkCal(totalNutrients);
+        updateMealCaloriesLabel(calories);
     });
 }
 
 function getTotalNutrients(parsedData) {
     //
+    let nutrients = parsedData.totalNutrients;
+    console.log(nutrients);
+    return nutrients;
 }
 
 function getkCal(nutrients) {
-
+    let calories = nutrients.ENERC_KCAL.quantity;
+    return calories;
 }
 
 // MARK: - UI UPDATE FUNCTIONS
