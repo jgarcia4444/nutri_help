@@ -5,7 +5,7 @@ body {
 /* Class selectors */
 .jumbotron {
     background-color: rgba(0,0,0,0.0);
-    margin-top: 10%;
+    margin-top: 7%;
 }
 
 .nav-link {
@@ -35,7 +35,7 @@ body {
     background-color: #e3c4a8;
     border-radius: 20px;
     color: #33313b;
-    margin: 7% auto;
+    margin: 3% auto;
 }
 
 #calculateButton:hover {

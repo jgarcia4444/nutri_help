@@ -23,12 +23,12 @@ a:hover {
 /* CLASSS SELECTORS */
 
 .jumbotron {
-    margin-top: 10%;
+    margin-top: 7%;
     background-color: rgba(0,0,0,0.0);
 }
 
 .description {
-    margin: 10% auto;
+    margin: 5% auto;
     width: 70%;
 }
 

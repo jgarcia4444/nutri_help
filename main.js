@@ -5,6 +5,7 @@ let FIRST_HALF_API_URL = "https://api.edamam.com/api/food-database/parser?ingr="
 let SECOND_HALF_API_URL = "&app_id=" + APP_ID + "&app_key=" + API_KEY;
 const formElemet = document.querySelector('form');
 let mealCaloriesLabelElement = document.querySelector('#mealCaloriesLabel');
+let NUTRIENT_API = "https://api.edamam.com/api/food-database/nutrients?";
 // let API_URL = `https://api.edamam.com/api/food-database/parser?ingr=${queryString}&app_id=${APP_ID}&app_key=${API_KEY}`
 
 
@@ -50,22 +51,60 @@ function queryAPI() {
             'Accept' : 'application/json'
         }
     }).then(response => response.json()).then(result => {
-        let Calories = getNutrientData(result);
-        updateMealCaloriesLabel(Calories);
+        let parsedData = getNutrientParsedData(result);
+        let quantitySpecificData = getNutrientDataPerQuantity(parsedData);
+        // let nutrients = getNutrients(quantitySpecificData);
+        // let Calories = getkCal(nutrients);
+        // updateMealCaloriesLabel(Calories);
     });
-    
 }
 
 // MARK: - Respond to data from api.
-function getNutrientData(foodData) {
+function getNutrientParsedData(foodData) {
     console.log(foodData);
     let parsedData = foodData.parsed;
-    console.log(parsedData);
-    let nutrients = parsedData[0].food.nutrients;
-    console.log(nutrients);
-    return nutrients["ENERC_KCAL"];
+    return parsedData;
+}
+
+
+
+function getNutrientDataPerQuantity(parsedData) {
+    // This function will place the post request for the 
+    // Specified amount of nutrients for the servings given.
+    let parsedArr = parsedData[0];
+    let quantity = parsedArr.quantity;
+    let measureURI = parsedArr.measure.uri;
+    let foodId = parsedArr.food.foodId;
+    let ingredients = {
+        "ingredients": [
+            {
+                "quantity": quantity,
+                "measureURI": measureURI,
+                "foodId": foodId
+            }
+        ]
+    };
+
+    fetch(NUTRIENT_API + SECOND_HALF_API_URL , {
+        method: "POST",
+        body: JSON.stringify(ingredients),
+        headers: {
+            'content-type': 'application/json'
+        }
+    }).then(response => response.json()).then(result => {
+        console.log(result);
+        let totalNutrients = getTotalNutrients(result);
+    });
+}
+
+function getTotalNutrients(parsedData) {
+    //
+}
+
+function getkCal(nutrients) {
 
 }
+
 // MARK: - UI UPDATE FUNCTIONS
 function updateMealCaloriesLabel(Calories) {
     var intMealCalories = Number(mealCaloriesLabel.innerHTML);
