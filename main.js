@@ -114,6 +114,18 @@ function updateMealCaloriesLabel(Calories) {
     newCalorieString = intMealCalories.toString();
     mealCaloriesLabel.innerHTML = newCalorieString;
 }
+// TO-DO: - CREATE NODES TO ATTACH THE ELEMENTS TO THE PAGE. 
+function createMealItem() {
+    var containerDiv = document.createElement('div');
+    containerDiv.setAttribute('class', 'container');
+    document.appendChild()
+    var rowDiv = document.createElement('div');
+    rowDiv.setAttribute('class', 'row');
+    containerDiv.appendChild(rowDiv);
+    let testText = document.createElement('p');
+    testText.innerHTML = "This is a test placing a row inside a container with javascript."
+    rowDiv.appendChild(testText);
+}
 
 // MARK: - CLEAR BUTTON FUNCTIONALITY
 
@@ -131,4 +143,5 @@ clearButton.addEventListener('click', (event) => {
 formElemet.addEventListener('submit', (event) => {
     event.preventDefault();
     queryAPI();
+    createMealItem();
 });
