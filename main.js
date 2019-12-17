@@ -52,7 +52,8 @@ function queryAPI() {
         }
     }).then(response => response.json()).then(result => {
         let parsedData = getNutrientParsedData(result);
-        let quantitySpecificData = getNutrientDataPerQuantity(parsedData);
+        console.log(parsedData);
+        getNutrientDataPerQuantity(parsedData);
     });
 }
 

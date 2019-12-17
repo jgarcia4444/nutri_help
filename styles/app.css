@@ -12,7 +12,7 @@ small {
 /* Class selectors */
 .jumbotron {
     background-color: rgba(0,0,0,0.0);
-    margin-top: 7%;
+    margin-top: 4%;
 }
 
 .nav-link {
@@ -23,6 +23,7 @@ small {
     text-decoration: underline;
     background-color: #e3c4a8;
     color: #33313b;
+    border-radius: 10PX;
 }
 
 .col-md-6 {
@@ -37,12 +38,20 @@ small {
     margin: 0, auto;
 }
 
+.col-sm-4 {
+    margin-bottom: 10%;
+}
+
+.card-body {
+    background-color: #33313b;
+}
+
 /* ID SELECTORS */
 
 #startOverButton {
     background-color: #4592af;
     border-radius: 20px;
-    margin: 1% auto;
+    margin: 2% auto;
     color: #f6f5f5;
 }
 
@@ -55,7 +64,7 @@ small {
     background-color: #e3c4a8;
     border-radius: 20px;
     color: #33313b;
-    margin: 1% auto;
+    margin: 2% auto;
 }
 
 #calculateButton:hover {
@@ -65,11 +74,11 @@ small {
 }
 
 #buttonRow {
-    margin: 7% auto;
+    margin: 3% auto;
 }
 
 #navContainer {
-    margin-top: 7%;
+    margin-top: 2%;
 }
 
 #footer {
