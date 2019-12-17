@@ -13,7 +13,7 @@
         <script src="https://developer.edamam.com/attribution/badge.js"></script>
     </head>
     <body>
-        <div class="container">
+        <div class="container-fluid">
             <div class="container" id="navContainer">
                 <ul class="nav justify-content-end">
                     <li class="nav-item">
@@ -32,18 +32,21 @@
                 
             </div>
             <form>
-                <div class="form-group">
-                    <label for="foodItem">
-                        Food
-                    </label>
-                    <input type="text" name="foodItem" id="foodItem" placeholder="What did yo have to eat?" class="form-control" aria-describedby="foodHelp" required>
-                    <small id="foodHelp" class="form-text text-muted">Specify the amount.</small>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="foodItem">
+                            Food
+                        </label>
+                        <input type="text" name="foodItem" id="foodItem" placeholder="What did yo have to eat?" class="form-control" aria-describedby="foodHelp" required>
+                        <small id="foodHelp" class="form-text">Specify the amount.(# of servings, ozs, grams, slice, whole, etc)</small>
+                    </div>
                 </div>
-                <div class="row text-center">
-                    <div class="col">
+                
+                <div class="row text-center" id="buttonRow">
+                    <div class="col-md-6">
                         <button type="submit" class="btn" id="calculateButton">Calculate Calories</button>
                     </div> 
-                    <div class="col">
+                    <div class="col-md-6">
                         <button class="btn" type="button" id="startOverButton">Start Over</button>
                     </div>
                 </div>

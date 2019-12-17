@@ -1,6 +1,13 @@
 body {
-    background-image: radial-gradient(#e3c4a8 5%, #4592af 30%, #33313b 65%);
+    /* background-image: radial-gradient(#e3c4a8 5%, #4592af 30%, #33313b 65%); */
+    background-color: #33313b;
     color: #f6f5f5;
+    font-family: Verdana;
+}
+
+small {
+    color: #f6f5f5;
+    font-size: 0.5em;
 }
 /* Class selectors */
 .jumbotron {
@@ -18,30 +25,47 @@ body {
     color: #33313b;
 }
 
+.col-md-6 {
+    margin: 0, auto;
+}
+
+.form-group {
+    margin: 0 auto;
+}
+
+.col-md-6 {
+    margin: 0, auto;
+}
+
 /* ID SELECTORS */
 
 #startOverButton {
     background-color: #4592af;
     border-radius: 20px;
-    margin: 10% auto;
+    margin: 1% auto;
     color: #f6f5f5;
 }
 
 #startOverButton:hover {
-    background-color: #33313b;
+    background-color: #e3c4a8;
+    color: #33313b;
 }
 
 #calculateButton {
     background-color: #e3c4a8;
     border-radius: 20px;
     color: #33313b;
-    margin: 10% auto;
+    margin: 1% auto;
 }
 
 #calculateButton:hover {
     background-color: #4592af;
     color: #f6f5f5;
     
+}
+
+#buttonRow {
+    margin: 7% auto;
 }
 
 #navContainer {
@@ -53,6 +77,10 @@ body {
     bottom: 0%;
     width: 100%;
     align-content: center;
+    background-color: #4592af;
+}
+#copyright {
+    margin-top: 10px;
 }
 
 
