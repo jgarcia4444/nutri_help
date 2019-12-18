@@ -90,8 +90,8 @@ function getNutrientDataPerQuantity(parsedData) {
         }
     }).then(response => response.json()).then(result => {
         let totalNutrients = getTotalNutrients(result);
-        let calories = getkCal(totalNutrients);
-        updateMealCaloriesLabel(calories);
+        let mealItemObject = makeMealItemObject(totalNutrients);
+        updateMealCaloriesLabel(mealItemObject.Calories);
     });
 }
 
@@ -102,10 +102,46 @@ function getTotalNutrients(parsedData) {
     return nutrients;
 }
 
+
+
+// MARK: - GET MEAL ITEM DETAILS FUNCTIONS
 function getkCal(nutrients) {
     let calories = nutrients.ENERC_KCAL.quantity;
     return calories;
 }
+
+function getCarbohydrates(nutrients) {
+    let carbohydrates = nutrients.CHOCDF.quantity;
+    return carbohydrates;
+}
+
+function getFats(nutrients) {
+    let fats = nutrients.FAT.quantity;
+    return fats;
+}
+
+function getProtein(nutrients) {
+    let protein = nutrients.PROCNT.quantity;
+    return protein;
+}
+
+function makeMealItemObject(nutrients) {
+    let calories = getkCal(nutrients);
+    let carbohydrates = getCarbohydrates(nutrients);
+    let fats = getFats(nutrients);
+    let protein = getProtein(nutrients);
+    let mealItemObject = {
+        'Calories': calories,
+        'Carbohydrates': carbohydrates,
+        'Fats': fats,
+        'Protein': protein
+    };
+    console.log(mealItemObject);
+    return mealItemObject;
+}
+
+
+
 
 // MARK: - UI UPDATE FUNCTIONS
 function updateMealCaloriesLabel(Calories) {
