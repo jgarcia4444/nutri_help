@@ -72,6 +72,7 @@ function getNutrientDataPerQuantity(parsedData) {
     let quantity = parsedArr.quantity;
     let measureURI = parsedArr.measure.uri;
     let foodId = parsedArr.food.foodId;
+    let foodLabel = parsedArr.food.label
     let ingredients = {
         "ingredients": [
             {
@@ -92,6 +93,7 @@ function getNutrientDataPerQuantity(parsedData) {
         let totalNutrients = getTotalNutrients(result);
         let mealItemObject = makeMealItemObject(totalNutrients);
         updateMealCaloriesLabel(mealItemObject.Calories);
+        createMealItem(foodLabel, mealItemObject);
     });
 }
 
@@ -151,16 +153,9 @@ function updateMealCaloriesLabel(Calories) {
     mealCaloriesLabel.innerHTML = newCalorieString;
 }
 // TO-DO: - CREATE NODES TO ATTACH THE ELEMENTS TO THE PAGE. 
-function createMealItem() {
-    var containerDiv = document.createElement('div');
-    containerDiv.setAttribute('class', 'container');
-    document.appendChild()
-    var rowDiv = document.createElement('div');
-    rowDiv.setAttribute('class', 'row');
-    containerDiv.appendChild(rowDiv);
-    let testText = document.createElement('p');
-    testText.innerHTML = "This is a test placing a row inside a container with javascript."
-    rowDiv.appendChild(testText);
+function createMealItem(foodLabel, itemObject) {
+    let itemTitle = document.querySelector('.card-title');
+    itemTitle.innerHTML = foodLabel;
 }
 
 // MARK: - CLEAR BUTTON FUNCTIONALITY
