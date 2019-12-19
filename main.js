@@ -52,7 +52,6 @@ function queryAPI() {
         }
     }).then(response => response.json()).then(result => {
         let parsedData = getNutrientParsedData(result);
-        console.log(parsedData);
         getNutrientDataPerQuantity(parsedData);
     });
 }
@@ -100,7 +99,6 @@ function getNutrientDataPerQuantity(parsedData) {
 function getTotalNutrients(parsedData) {
     //
     let nutrients = parsedData.totalNutrients;
-    console.log(nutrients);
     return nutrients;
 }
 
@@ -138,7 +136,6 @@ function makeMealItemObject(nutrients) {
         'Fats': fats,
         'Protein': protein
     };
-    console.log(mealItemObject);
     return mealItemObject;
 }
 
@@ -152,27 +149,77 @@ function updateMealCaloriesLabel(Calories) {
     newCalorieString = intMealCalories.toString();
     mealCaloriesLabel.innerHTML = newCalorieString;
 }
-// TO-DO: - CREATE NODES TO ATTACH THE ELEMENTS TO THE PAGE. 
+
+function createRow() {
+    let mealItemsContainer = document.querySelector('#mealItemsContainer');
+    let rowEle = document.createElement('div');
+    rowEle.setAttribute('class', 'row');
+    mealItemsContainer.appendChild(rowEle)
+}
+
+function createColMd4() {
+    let mealItemsContainer = document.querySelector('#mealItemsContainer');
+    let furthestRow = mealItemsContainer.lastChild;
+    let colMd4Ele = document.createElement('div');
+    colMd4Ele.setAttribute('class', 'col-md-4');
+    furthestRow.appendChild(colMd4Ele);
+}
+
+function rowHasLessThanThreeColumns(ele) {
+    if (ele.childElementCount < 3) {
+        return true
+    } 
+    return false;
+}
+
+function formMealItemCard(foodLabel, itemObject) {
+    let card = document.createElement('div');
+    card.setAttribute('class', 'card');
+    let cardBody = document.createElement('div');
+    cardBody.setAttribute('class', 'card-body');
+    let cardTitle = document.createElement('h5');
+    cardTitle.setAttribute('class', 'card-title');
+    cardTitle.innerHTML = foodLabel;
+    let mealItemsContainer = document.querySelector('#mealItemsContainer');
+    let furthestRow = mealItemsContainer.lastChild;
+    let furthestCol = furthestRow.lastChild;
+    furthestCol.appendChild(card);
+    card.appendChild(cardBody);
+    cardBody.appendChild(cardTitle);
+    console.log(itemObject.length);
+}
+
 function createMealItem(foodLabel, itemObject) {
-    let itemTitle = document.querySelector('.card-title');
-    itemTitle.innerHTML = foodLabel;
+    //
+    let mealItemsContainer = document.querySelector('#mealItemsContainer');
+    let furthestRow = mealItemsContainer.lastChild;
+    if (rowHasLessThanThreeColumns(furthestRow)) {
+        createColMd4();
+        formMealItemCard(foodLabel, itemObject);
+    } else {
+        createRow();
+        createColMd4();
+        formMealItemCard(foodLabel, itemObject);
+    }
 }
 
 // MARK: - CLEAR BUTTON FUNCTIONALITY
 
-function clearMealCaloriesLabel() {
-    mealCaloriesLabel.innerHTML = "0000";
+function clearMeal() {
+    mealCaloriesLabel.innerHTML = '0000';
+    let mealItemsContainer = document.querySelector('#mealItemsContainer');
+    mealItemsContainer.innerHTML = '';
+    createRow();
 }
 
 const clearButton = document.querySelector('#startOverButton');
 
 clearButton.addEventListener('click', (event) => {
-    clearMealCaloriesLabel();
+    clearMeal();
 });
 
 
 formElemet.addEventListener('submit', (event) => {
     event.preventDefault();
     queryAPI();
-    createMealItem();
 });
