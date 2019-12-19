@@ -42,6 +42,10 @@ small {
     margin-bottom: 10%;
 }
 
+.col-md-4 {
+    margin: 2% auto;
+}
+
 .card {
     background-color: #33313b;
     color: #f6f5f5;
