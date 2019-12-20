@@ -175,7 +175,11 @@ function rowHasLessThanThreeColumns(ele) {
     } 
     return false;
 }
-
+function createParagraph(classValue) {
+    let paraEle = document.createElement('p');
+    paraEle.setAttribute('class', classValue);
+    return paraEle;
+}
 function formMealItemCard(foodLabel, itemObject) {
     let card = document.createElement('div');
     card.setAttribute('class', 'card');
@@ -190,10 +194,18 @@ function formMealItemCard(foodLabel, itemObject) {
     furthestCol.appendChild(card);
     card.appendChild(cardBody);
     cardBody.appendChild(cardTitle);
-    let calorieParagraph = document.createElement('p');
-    calorieParagraph.setAttribute('class', 'card-text');
+    let calorieParagraph = createParagraph('card-text');
     calorieParagraph.innerHTML = "Calories: " + itemObject.Calories;
     cardBody.appendChild(calorieParagraph);
+    let carbParagraph = createParagraph('card-text');
+    carbParagraph.innerHTML = 'Carbohydrates: ' + itemObject.Carbohydrates;
+    cardBody.appendChild(carbParagraph);
+    let fatsParagraph = createParagraph('card-text');
+    fatsParagraph.innerHTML = 'Fats: ' + itemObject.Fats;
+    cardBody.appendChild(fatsParagraph);
+    let proteinParagraph = createParagraph('card-text');
+    proteinParagraph.innerHTML = 'Protein: ' + itemObject.Protein;
+    cardBody.appendChild(proteinParagraph);
 }
 
 function createMealItem(foodLabel, itemObject) {

@@ -55,7 +55,7 @@ small {
             0 22.3px 17.9px rgba(69, 146, 175, 0.072),
             0 41.8px 33.4px rgba(69, 146, 175, 0.086),
             0 100px 80px rgba(69, 146, 175, 0.12);
-    border: 10px solid #e3c4a8
+    border: 5px solid #e3c4a8
 
 }
 
@@ -107,6 +107,8 @@ small {
     margin-top: 10px;
 }
 
-
+#mealItemsContainer {
+    padding-bottom: 10%;
+}
 
 
