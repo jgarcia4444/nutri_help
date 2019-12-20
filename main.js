@@ -89,10 +89,14 @@ function getNutrientDataPerQuantity(parsedData) {
             'content-type': 'application/json'
         }
     }).then(response => response.json()).then(result => {
-        let totalNutrients = getTotalNutrients(result);
-        let mealItemObject = makeMealItemObject(totalNutrients);
-        updateMealCaloriesLabel(mealItemObject.Calories);
-        createMealItem(foodLabel, mealItemObject);
+            
+            if (result != undefined) {
+                let totalNutrients = getTotalNutrients(result);
+                let mealItemObject = makeMealItemObject(totalNutrients);
+                updateMealCaloriesLabel(mealItemObject.Calories);
+                createMealItem(foodLabel, mealItemObject);
+            }
+            
     });
 }
 
@@ -186,7 +190,10 @@ function formMealItemCard(foodLabel, itemObject) {
     furthestCol.appendChild(card);
     card.appendChild(cardBody);
     cardBody.appendChild(cardTitle);
-    console.log(itemObject.length);
+    let calorieParagraph = document.createElement('p');
+    calorieParagraph.setAttribute('class', 'card-text');
+    calorieParagraph.innerHTML = "Calories: " + itemObject.Calories;
+    cardBody.appendChild(calorieParagraph);
 }
 
 function createMealItem(foodLabel, itemObject) {
