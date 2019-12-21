@@ -59,6 +59,10 @@ small {
 
 }
 
+.card-title {
+    text-transform: capitalize;
+}
+
 /* ID SELECTORS */
 
 #startOverButton {
@@ -108,7 +112,7 @@ small {
 }
 
 #mealItemsContainer {
-    padding-bottom: 10%;
+    padding-bottom: 20%;
 }
 
 

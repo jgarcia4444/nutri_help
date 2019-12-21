@@ -1,4 +1,6 @@
 // MAIN.JS
+
+
 const APP_ID = "8e4998b8";
 const API_KEY = "adb9b375b1bf447d1ce4f687f4c14ace";
 let FIRST_HALF_API_URL = "https://api.edamam.com/api/food-database/parser?ingr=";
@@ -7,7 +9,6 @@ const formElemet = document.querySelector('form');
 let mealCaloriesLabelElement = document.querySelector('#mealCaloriesLabel');
 let NUTRIENT_API = "https://api.edamam.com/api/food-database/nutrients?";
 // let API_URL = `https://api.edamam.com/api/food-database/parser?ingr=${queryString}&app_id=${APP_ID}&app_key=${API_KEY}`
-
 
 
 // MARK: - Functions for handling user input and requesting info from the API
@@ -175,11 +176,28 @@ function rowHasLessThanThreeColumns(ele) {
     } 
     return false;
 }
+
 function createParagraph(classValue) {
     let paraEle = document.createElement('p');
     paraEle.setAttribute('class', classValue);
     return paraEle;
 }
+
+function formCardID(foodLabel) {
+    let foodLabelArr = foodLabel.split(' ');
+    if (foodLabelArr.length > 1) {
+        var cardID = foodLabelArr[0];
+        for (var i = 1; i < foodLabelArr.length; i++) {
+            let word = foodLabelArr[i];
+            let capitalized = word[0].toUpperCase() + word.slice(1);
+            cardID += capitalized;
+            return cardID;
+        }
+    } else {
+        return foodLabel;
+    }
+}
+
 function formMealItemCard(foodLabel, itemObject) {
     let card = document.createElement('div');
     card.setAttribute('class', 'card');
@@ -206,6 +224,20 @@ function formMealItemCard(foodLabel, itemObject) {
     let proteinParagraph = createParagraph('card-text');
     proteinParagraph.innerHTML = 'Protein: ' + itemObject.Protein;
     cardBody.appendChild(proteinParagraph);
+    let cardId = formCardID(foodLabel);
+    card.parentElement.setAttribute('id', cardId);
+    addDeleteItemButton(card);
+}
+
+function addDeleteItemButton(parentElement) {
+    let deleteItemButtonDiv = document.createElement('div');
+    deleteItemButtonDiv.setAttribute('class', 'deleteItemButtonDiv');
+    let deleteButton = document.createElement('button');
+    deleteButton.setAttribute('class', 'deleteButton');
+    deleteButton.setAttribute('type', 'button');
+    deleteButton.innerHTML = "Delete Item";
+    deleteItemButtonDiv.appendChild(deleteButton)
+    parentElement.appendChild(deleteItemButtonDiv);
 }
 
 function createMealItem(foodLabel, itemObject) {
@@ -231,7 +263,9 @@ function clearMeal() {
     createRow();
 }
 
-const clearButton = document.querySelector('#startOverButton');
+let clearButton = document.querySelector('#startOverButton');
+
+// Mark: - DELETE ITEM FUNCTIONALITY
 
 clearButton.addEventListener('click', (event) => {
     clearMeal();
