@@ -47,7 +47,7 @@ small {
 }
 
 .card {
-    background-color: #33313b;
+    background-color: #4592af;
     color: #f6f5f5;
     box-shadow: 0 2.8px 2.2px rgba(69, 146, 175, 0.034),
             0 6.7px 5.3px rgba(69, 146, 175, 0.048),
@@ -61,6 +61,21 @@ small {
 
 .card-title {
     text-transform: capitalize;
+}
+
+.deleteItemButtonDiv {
+    margin: 4% auto;
+}
+
+.deleteButton {
+    border-radius: 20px;
+    background-color: #e3c4a8;
+    box-shadow: 0px 2px #33313b;
+}
+
+.deleteButton:active {
+    box-shadow: none;
+    
 }
 
 /* ID SELECTORS */
@@ -78,6 +93,10 @@ small {
     box-shadow: 0px 0px 50px #e3c4a8;
 }
 
+#startOverButton:active {
+    box-shadow: none;
+}
+
 #calculateButton {
     background-color: #e3c4a8;
     border-radius: 20px;
@@ -90,6 +109,10 @@ small {
     background-color: #4592af;
     color: #f6f5f5;
     box-shadow: 0px 0px 50px #4592af;
+}
+
+#calculateButton:active {
+    box-shadow: none;
 }
 
 #buttonRow {

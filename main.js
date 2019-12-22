@@ -177,11 +177,7 @@ function rowHasLessThanThreeColumns(ele) {
     return false;
 }
 
-function createParagraph(classValue) {
-    let paraEle = document.createElement('p');
-    paraEle.setAttribute('class', classValue);
-    return paraEle;
-}
+
 
 function formCardID(foodLabel) {
     let foodLabelArr = foodLabel.split(' ');
@@ -198,30 +194,38 @@ function formCardID(foodLabel) {
     }
 }
 
+function createElementWithClass(classValue, elementValue) {
+    let paraEle = document.createElement(elementValue);
+    paraEle.setAttribute('class', classValue);
+    return paraEle;
+}
+
+function findFurthestCol(rowContainerId) {
+    let rowContainer = document.querySelector(rowContainerId);
+    let furthestRow = rowContainer.lastChild;
+    let furthestColumn = furthestRow.lastChild;
+    return furthestColumn
+}
+
 function formMealItemCard(foodLabel, itemObject) {
-    let card = document.createElement('div');
-    card.setAttribute('class', 'card');
-    let cardBody = document.createElement('div');
-    cardBody.setAttribute('class', 'card-body');
-    let cardTitle = document.createElement('h5');
-    cardTitle.setAttribute('class', 'card-title');
+    let card = createElementWithClass('card', 'div');
+    let cardBody = createElementWithClass('card-body', 'div');
+    let cardTitle = createElementWithClass('card-title', 'h5');
     cardTitle.innerHTML = foodLabel;
-    let mealItemsContainer = document.querySelector('#mealItemsContainer');
-    let furthestRow = mealItemsContainer.lastChild;
-    let furthestCol = furthestRow.lastChild;
+    let furthestCol = findFurthestCol('#mealItemsContainer');
     furthestCol.appendChild(card);
     card.appendChild(cardBody);
     cardBody.appendChild(cardTitle);
-    let calorieParagraph = createParagraph('card-text');
+    let calorieParagraph = createElementWithClass('card-text', 'p');
     calorieParagraph.innerHTML = "Calories: " + itemObject.Calories;
     cardBody.appendChild(calorieParagraph);
-    let carbParagraph = createParagraph('card-text');
+    let carbParagraph = createElementWithClass('card-text', 'p');
     carbParagraph.innerHTML = 'Carbohydrates: ' + itemObject.Carbohydrates;
     cardBody.appendChild(carbParagraph);
-    let fatsParagraph = createParagraph('card-text');
+    let fatsParagraph = createElementWithClass('card-text', 'p');
     fatsParagraph.innerHTML = 'Fats: ' + itemObject.Fats;
     cardBody.appendChild(fatsParagraph);
-    let proteinParagraph = createParagraph('card-text');
+    let proteinParagraph = createElementWithClass('card-text', 'p');
     proteinParagraph.innerHTML = 'Protein: ' + itemObject.Protein;
     cardBody.appendChild(proteinParagraph);
     let cardId = formCardID(foodLabel);
@@ -235,7 +239,7 @@ function addDeleteItemButton(parentElement) {
     let deleteButton = document.createElement('button');
     deleteButton.setAttribute('class', 'deleteButton');
     deleteButton.setAttribute('type', 'button');
-    deleteButton.innerHTML = "Delete Item";
+    deleteButton.innerHTML = "Delete";
     deleteItemButtonDiv.appendChild(deleteButton)
     parentElement.appendChild(deleteItemButtonDiv);
 }
@@ -266,6 +270,16 @@ function clearMeal() {
 let clearButton = document.querySelector('#startOverButton');
 
 // Mark: - DELETE ITEM FUNCTIONALITY
+
+let deleteButtons = document.querySelectorAll('.deleteButton');
+
+function deleteItem() {
+
+}
+
+deleteButtons.addEventListener('click', (event) => {
+    deleteItem();
+})
 
 clearButton.addEventListener('click', (event) => {
     clearMeal();
