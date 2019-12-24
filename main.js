@@ -234,10 +234,8 @@ function formMealItemCard(foodLabel, itemObject) {
 }
 
 function addDeleteItemButton(parentElement) {
-    let deleteItemButtonDiv = document.createElement('div');
-    deleteItemButtonDiv.setAttribute('class', 'deleteItemButtonDiv');
-    let deleteButton = document.createElement('button');
-    deleteButton.setAttribute('class', 'deleteButton');
+    let deleteItemButtonDiv = createElementWithClass('deleteItemButtonDiv', 'div');
+    let deleteButton = createElementWithClass('deleteButton', 'button');
     deleteButton.setAttribute('type', 'button');
     deleteButton.innerHTML = "Delete";
     deleteItemButtonDiv.appendChild(deleteButton)
@@ -273,13 +271,13 @@ let clearButton = document.querySelector('#startOverButton');
 
 let deleteButtons = document.querySelectorAll('.deleteButton');
 
-function deleteItem() {
+// function deleteItem() {
 
-}
+// }
 
-deleteButtons.addEventListener('click', (event) => {
-    deleteItem();
-})
+// deleteButtons.addEventListener('click', (event) => {
+//     deleteItem();
+// })
 
 clearButton.addEventListener('click', (event) => {
     clearMeal();
