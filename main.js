@@ -269,8 +269,26 @@ let clearButton = document.querySelector('#startOverButton');
 
 // Mark: - DELETE ITEM FUNCTIONALITY
 
+function parseOutNumberFromMealItem(macronutrientElement) {
+
+    let innerTextArr = macronutrientElement.innerHTML.split(' ');
+    
+    let macroNum = Number(innerTextArr[innerTextArr.length - 1])
+
+    let numToSubtract = macroNum * -1;
+
+    updateMealCaloriesLabel(numToSubtract);
+}
+
 function deleteItem(deleteButtonParent) {
-    // 
+    // get calorie amount.
+
+    let cardBody = deleteButtonParent.parentElement;
+
+    let calorieText = cardBody.querySelector('.card-text');
+
+    parseOutNumberFromMealItem(calorieText);
+
     let col = deleteButtonParent.parentElement;
     let row = col.parentElement;
     row.removeChild(col);
