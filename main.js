@@ -269,15 +269,19 @@ let clearButton = document.querySelector('#startOverButton');
 
 // Mark: - DELETE ITEM FUNCTIONALITY
 
-let deleteButtons = document.querySelectorAll('.deleteButton');
+function deleteItem(deleteButtonParent) {
+    // 
+    let col = deleteButtonParent.parentElement;
+    let row = col.parentElement;
+    row.removeChild(col);
+}
 
-// function deleteItem() {
-
-// }
-
-// deleteButtons.addEventListener('click', (event) => {
-//     deleteItem();
-// })
+document.addEventListener('click', (event) => {
+        if (event.target.textContent == 'Delete') {
+            let deleteButtonParent = event.target.parentElement;
+            deleteItem(deleteButtonParent);
+        }
+});
 
 clearButton.addEventListener('click', (event) => {
     clearMeal();
