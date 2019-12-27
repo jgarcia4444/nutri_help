@@ -24,14 +24,31 @@
                     </li>
                 </ul>
             </div>
+            <div id="loadingSpinner" class=""></div>
             <div class="jumbotron text-center">
-                <div id="loadingSpinner" class=""></div>
-                <h1 class="display-4">
-                    Meal Calories:
-                    
+                <h1 class="display-6">
+                    Meal Macronutrients
                 </h1>
-                <h4 class="display-4" id="mealCaloriesLabel">0000</h4>
-                
+                <div class="container" id="mealMacronutrientsContainer">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="mealCaloriesLabel">Calories</label>
+                            <h4 class="display-6" id="mealCaloriesLabel">0000</h4>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="mealCarbohydrates">Carbs</label>
+                            <h4 class="display-6" id="mealCarbohydratesLabel">0000</h4>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="mealFats">Fat</label>
+                            <h4 class="display-6" id="mealFatsLabel">0000</h4>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="mealProtein">Protein</label>
+                            <h4 class="display-6" id="mealProteinLabel">0000</h4>
+                        </div>
+                    </div>
+                </div>
             </div>
             <form>
                 <div class="row">

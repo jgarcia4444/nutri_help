@@ -6,7 +6,6 @@ const API_KEY = "adb9b375b1bf447d1ce4f687f4c14ace";
 let FIRST_HALF_API_URL = "https://api.edamam.com/api/food-database/parser?ingr=";
 let SECOND_HALF_API_URL = "&app_id=" + APP_ID + "&app_key=" + API_KEY;
 const formElemet = document.querySelector('form');
-let mealCaloriesLabelElement = document.querySelector('#mealCaloriesLabel');
 let NUTRIENT_API = "https://api.edamam.com/api/food-database/nutrients?";
 // let API_URL = `https://api.edamam.com/api/food-database/parser?ingr=${queryString}&app_id=${APP_ID}&app_key=${API_KEY}`
 
@@ -93,7 +92,7 @@ function getNutrientDataPerQuantity(parsedData) {
             if (result != undefined) {
                 let totalNutrients = getTotalNutrients(result);
                 let mealItemObject = makeMealItemObject(totalNutrients);
-                updateMealCaloriesLabel(mealItemObject.Calories);
+                updateMealMacronutrients(mealItemObject);
                 createMealItem(foodLabel, mealItemObject);
             }
             
@@ -148,11 +147,20 @@ function makeMealItemObject(nutrients) {
 
 
 // MARK: - UI UPDATE FUNCTIONS
-function updateMealCaloriesLabel(Calories) {
-    var intMealCalories = Number(mealCaloriesLabel.innerHTML);
-    intMealCalories += Calories;
-    newCalorieString = intMealCalories.toString();
-    mealCaloriesLabel.innerHTML = newCalorieString;
+function updateMealMacronutrients(mealItemObject) {
+    let mealCaloriesLabel = document.querySelector('#mealCaloriesLabel');
+    let mealCarbohydratesLabel = document.querySelector('#mealCarbohydratesLabel');
+    let mealFatsLabel = document.querySelector('#mealFatsLabel');
+    let mealProteinLabel = document.querySelector('#mealProteinLabel');
+
+    let macroNutrientArr = [mealCaloriesLabel, mealCarbohydratesLabel, mealFatsLabel, mealProteinLabel];
+    let itemObjectKeys = Object.keys(mealItemObject);
+    for (var i = 0; i < macroNutrientArr.length; i++) {
+        var num = Number(macroNutrientArr[i].innerHTML);
+        num += mealItemObject[itemObjectKeys[i]];
+        num = num.toFixed(2);
+        macroNutrientArr[i].innerHTML = num.toString();
+    }
 }
 
 function createRow() {
@@ -217,16 +225,16 @@ function formMealItemCard(foodLabel, itemObject) {
     card.appendChild(cardBody);
     cardBody.appendChild(cardTitle);
     let calorieParagraph = createElementWithClass('card-text', 'p');
-    calorieParagraph.innerHTML = "Calories: " + itemObject.Calories;
+    calorieParagraph.innerHTML = "Calories " + itemObject.Calories.toFixed(2);
     cardBody.appendChild(calorieParagraph);
     let carbParagraph = createElementWithClass('card-text', 'p');
-    carbParagraph.innerHTML = 'Carbohydrates: ' + itemObject.Carbohydrates;
+    carbParagraph.innerHTML = 'Carbohydrates ' + itemObject.Carbohydrates.toFixed(2);
     cardBody.appendChild(carbParagraph);
     let fatsParagraph = createElementWithClass('card-text', 'p');
-    fatsParagraph.innerHTML = 'Fats: ' + itemObject.Fats;
+    fatsParagraph.innerHTML = 'Fats ' + itemObject.Fats.toFixed(2);
     cardBody.appendChild(fatsParagraph);
     let proteinParagraph = createElementWithClass('card-text', 'p');
-    proteinParagraph.innerHTML = 'Protein: ' + itemObject.Protein;
+    proteinParagraph.innerHTML = 'Protein ' + itemObject.Protein.toFixed(2);
     cardBody.appendChild(proteinParagraph);
     let cardId = formCardID(foodLabel);
     card.parentElement.setAttribute('id', cardId);
@@ -259,7 +267,16 @@ function createMealItem(foodLabel, itemObject) {
 // MARK: - CLEAR BUTTON FUNCTIONALITY
 
 function clearMeal() {
-    mealCaloriesLabel.innerHTML = '0000';
+    let mealCaloriesLabel = document.querySelector('#mealCaloriesLabel');
+    let mealCarbohydratesLabel = document.querySelector('#mealCarbohydratesLabel');
+    let mealFatsLabel = document.querySelector('#mealFatsLabel');
+    let mealProteinLabel = document.querySelector('#mealProteinLabel');
+
+    mealCaloriesLabel.innerHTML = '0';
+    mealCarbohydratesLabel.innerHTML = '0';
+    mealFatsLabel.innerHTML ='0';
+    mealProteinLabel.innerHTML = '0';
+
     let mealItemsContainer = document.querySelector('#mealItemsContainer');
     mealItemsContainer.innerHTML = '';
     createRow();
@@ -269,25 +286,30 @@ let clearButton = document.querySelector('#startOverButton');
 
 // Mark: - DELETE ITEM FUNCTIONALITY
 
-function parseOutNumberFromMealItem(macronutrientElement) {
+function parseOutMacronutrientsFromMealItem(macronutrientElements) {
+    let subtractionObject = {};
+    for (var i = 0; i < macronutrientElements.length; i++) {
 
-    let innerTextArr = macronutrientElement.innerHTML.split(' ');
+        let innerTextArr = macronutrientElements[i].innerHTML.split(' ');
     
-    let macroNum = Number(innerTextArr[innerTextArr.length - 1])
+        let macroNum = Number(innerTextArr[innerTextArr.length - 1]);
 
-    let numToSubtract = macroNum * -1;
+        let numToSubtract = macroNum * -1;
 
-    updateMealCaloriesLabel(numToSubtract);
+        subtractionObject[innerTextArr[0]] = numToSubtract;
+    }
+    console.log(subtractionObject);
+    updateMealMacronutrients(subtractionObject);
+
 }
 
 function deleteItem(deleteButtonParent) {
-    // get calorie amount.
 
     let cardBody = deleteButtonParent.parentElement;
 
-    let calorieText = cardBody.querySelector('.card-text');
+    let macronutrientElements = cardBody.querySelectorAll('.card-text');
 
-    parseOutNumberFromMealItem(calorieText);
+    parseOutMacronutrientsFromMealItem(macronutrientElements);
 
     let col = deleteButtonParent.parentElement;
     let row = col.parentElement;
