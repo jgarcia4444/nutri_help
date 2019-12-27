@@ -10,7 +10,6 @@ let mealCaloriesLabelElement = document.querySelector('#mealCaloriesLabel');
 let NUTRIENT_API = "https://api.edamam.com/api/food-database/nutrients?";
 // let API_URL = `https://api.edamam.com/api/food-database/parser?ingr=${queryString}&app_id=${APP_ID}&app_key=${API_KEY}`
 
-
 // MARK: - Functions for handling user input and requesting info from the API
 function parseUserInfo() {
     //
@@ -42,7 +41,7 @@ function formAPIQuery() {
 }
 
 function queryAPI() {
-
+    addLoadingSpinner();
     let formedURL = formAPIQuery();
     fetch(formedURL, {
         method: 'GET',
@@ -99,6 +98,7 @@ function getNutrientDataPerQuantity(parsedData) {
             }
             
     });
+    removeLoadingSpinner();
 }
 
 function getTotalNutrients(parsedData) {
@@ -294,6 +294,20 @@ function deleteItem(deleteButtonParent) {
     row.removeChild(col);
 }
 
+// MARK: - LOADING SPINNER FUNCTIONALITY
+
+function addLoadingSpinner() {
+    let loadingDiv = document.querySelector('#loadingSpinner');
+    loadingDiv.classList.add('loadingSpinner');
+}
+
+function removeLoadingSpinner() {
+    let loadingDiv = document.querySelector('#loadingSpinner');
+    loadingDiv.classList.remove('loadingSpinner');
+}
+
+
+// MARK: - EVENT LISTENERS
 document.addEventListener('click', (event) => {
         if (event.target.textContent == 'Delete') {
             let deleteButtonParent = event.target.parentElement;
