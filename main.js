@@ -1,3 +1,5 @@
+
+
 // MAIN.JS
 
 
@@ -34,7 +36,7 @@ function formAPIQuery() {
         }
         queryURL += SECOND_HALF_API_URL; 
     } else {
-        queryURL += foodQueryArr[0] + SECOND_HALF_API_URL;
+        queryURL += "1%20" + "serving%20" + foodQueryArr[0] + SECOND_HALF_API_URL;
     }
     return queryURL;
 }
@@ -49,14 +51,34 @@ function queryAPI() {
             'content-type' : 'application/json',
             'Accept' : 'application/json'
         }
-    }).then(response => response.json()).then(result => {
-        let parsedData = getNutrientParsedData(result);
-        getNutrientDataPerQuantity(parsedData);
-    });
+    })
+    .then(response => {
+        responseStatus = response.status;
+        return response.json();
+    })
+    .then(result => {
+        switch(responseStatus) {
+            case 200:
+                let parsedData = getNutrientParsedData(result);
+                getNutrientDataPerQuantity(parsedData);
+                break;
+            case 400:
+                console.log('Client error');
+                break;
+            default:
+                console.log('Unhandled Error');
+                break;
+        }      
+    })
+    .catch(err => {
+        
+        console.log(err);
+    })
 }
 
 // MARK: - Respond to data from api.
 function getNutrientParsedData(foodData) {
+    console.log(foodData);
     let parsedData = foodData.parsed;
     return parsedData;
 }
