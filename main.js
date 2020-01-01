@@ -177,19 +177,31 @@ function getkCal(nutrients) {
 }
 
 function getCarbohydrates(nutrients) {
-    console.log(nutrients);
-    let carbohydrates = nutrients.CHOCDF.quantity;
-    return carbohydrates;
+    if (nutrients.CHOCDF == undefined) {
+        return 0
+    } else {
+       let carbohydrates = nutrients.CHOCDF.quantity;
+        return carbohydrates; 
+    }
+    
 }
 
 function getFats(nutrients) {
-    let fats = nutrients.FAT.quantity;
-    return fats;
+    if (nutrients.FAT == undefined) {
+        return 0;
+    } else {
+        let fats = nutrients.FAT.quantity;
+        return fats;
+    }
 }
 
 function getProtein(nutrients) {
-    let protein = nutrients.PROCNT.quantity;
-    return protein;
+    if (nutrients.PROCNT == undefined) {
+        return 0;
+    } else {
+        let protein = nutrients.PROCNT.quantity;
+        return protein;
+    }
 }
 
 function makeMealItemObject(nutrients) {
