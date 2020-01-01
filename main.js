@@ -83,6 +83,44 @@ function getNutrientParsedData(foodData) {
     return parsedData;
 }
 
+function formModal() {
+    let modalDiv = createElementWithClass('modal', 'div');
+    modalDiv.setAttribute('tabindex', '-1');
+    modalDiv.setAttribute('role', 'dialog');
+    let modalDialog = createElementWithClass('modal-dialog', 'div');
+    modalDialog.setAttribute('role', 'document');
+    modalDiv.appendChild(modalDialog);
+    let modalContent = createElementWithClass('modal-content', 'div');
+    modalDialog.appendChild(modalContent);
+    // Header
+    let modalHeader = createElementWithClass('modal-header', 'div');
+    let modalTitle = createElementWithClass('modal-title', 'h5');
+    modalTitle.innerHTML = "Whoops!";
+    modalHeader.appendChild(modalTitle);
+    let closeButton = createElementWithClass('close', 'button');
+    closeButton.setAttribute('type', 'button');
+    closeButton.setAttribute('data-dismiss', 'modal');
+    closeButton.setAttribute('aria-label', 'Close');
+    let closeSpan = document.createElement('span');
+    closeSpan.setAttribute('aria-hidden', 'true');
+    closeButton.appendChild(closeSpan);
+    modalHeader.appendChild(closeButton);
+    modalContent.appendChild(modalHeader);
+    // Body
+    let modalBody = createElementWithClass('modal-body', 'div');
+    let bodyParagraph = document.createElement('p');
+    bodyParagraph.innerHTML = 'Sorry Unfortunately the API being used does not have information for all foods.';
+    modalBody.appendChild(bodyParagraph);
+    modalContent.appendChild(modalBody);
+
+    return modalDiv;
+}
+
+function presentNotFoundModal() {
+    let notFoundModal = formModal();
+    document.appendChild(notFoundModal);
+}
+
 
 
 function getNutrientDataPerQuantity(parsedData) {
@@ -116,6 +154,9 @@ function getNutrientDataPerQuantity(parsedData) {
                 let mealItemObject = makeMealItemObject(totalNutrients);
                 updateMealMacronutrients(mealItemObject);
                 createMealItem(foodLabel, mealItemObject);
+            } else if (result == undefined) {
+                // Present Modal
+                presentNotFoundModal();
             }
             
     });
@@ -129,7 +170,6 @@ function getTotalNutrients(parsedData) {
 }
 
 
-
 // MARK: - GET MEAL ITEM DETAILS FUNCTIONS
 function getkCal(nutrients) {
     let calories = nutrients.ENERC_KCAL.quantity;
@@ -137,6 +177,7 @@ function getkCal(nutrients) {
 }
 
 function getCarbohydrates(nutrients) {
+    console.log(nutrients);
     let carbohydrates = nutrients.CHOCDF.quantity;
     return carbohydrates;
 }

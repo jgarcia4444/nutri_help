@@ -160,9 +160,13 @@ h1>.display-6 {
 /* SPINNER STYLING */
 
 .loadingSpinner {
+    height: 100%;
+    background-color: white;
     content: "";
     box-sizing: border-box;
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
     height: 50px;
     width: 50px;
     margin: 0 auto 20px auto;
